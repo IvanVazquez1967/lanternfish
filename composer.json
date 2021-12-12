@@ -1,0 +1,14 @@
+{
+    "name": "ivanvazquez1967/lanternfish",
+    "autoload": {
+        "psr-4": {
+            "Lanternfish\\": "src/"
+        },
+        "files": [
+            "src/aux.php"
+        ]
+    },
+    "require": {
+        "ext-pcntl": "*"
+    }
+}
