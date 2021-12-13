@@ -18,7 +18,9 @@ class Message
     public function mainMsg($msgType)
     {
         $this->helper->clearScreen();
-        echo INTRO_MSG;
+        if (INTRO_MSG_TYPE == $msgType) {
+            echo INTRO_MSG;
+        }
 
         return $this->getOption();
     }
@@ -35,10 +37,10 @@ class Message
         $this->helper->clearScreen();
 
         echo "\n The new Lanternfishes have been spawned! \n";
-        echo "\n initial state: " . $initialState;
-        echo "\n days: " . $days. "\n";
-        echo "\n final state: " . $finalState. "\n";
-        echo "\n At the end there are " . $fishesTotal . " lanternfishes! \n";
+        echo "\n * initial state: " . $initialState;
+        echo "\n * days: " . $days. "\n";
+        //echo "\n * final state: " . $finalState. "\n";
+        echo "\n * At the end there are " . $fishesTotal . " lanternfishes! \n";
     }
     
     public function exitMsg()

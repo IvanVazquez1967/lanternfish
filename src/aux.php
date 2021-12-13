@@ -20,6 +20,8 @@ const INITIAL_STATE_NODE = "initialState";
 
 const DAYS_NODE = "days";
 
+const INTRO_MSG_TYPE = "intro_msg";
+
 const BABY_LANTERNFISH = 9;
 
 const RELIEVED_LANTERNFISH = 7;

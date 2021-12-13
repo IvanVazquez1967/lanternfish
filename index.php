@@ -10,7 +10,7 @@ use Lanternfish\Helper;
 $message = new Message();
 $helper = new Helper();
 
-$params = $message->mainMsg("intro");
+$params = $message->mainMsg(INTRO_MSG_TYPE);
 
 $lanterfish = new Lanternfish($params[INITIAL_STATE_NODE], $params[DAYS_NODE]);
 $lanterfish->spawn();
