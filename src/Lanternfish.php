@@ -6,11 +6,13 @@ class Lanternfish
 {
     private string $initialState;
     private int $days;
+    public Message $message;
 
     public function __construct(int $initialState, int $days)
     {
         $this->initialState = $initialState;
         $this->days = $days;
+        $this->message = new Message();
     }
 
     /**
@@ -20,28 +22,28 @@ class Lanternfish
      */
     public function spawn()
     {
-        $currentState = explode("", strval($this->initialState));
+        $currentState = str_split(strval($this->initialState));
+        $initialStateArray = implode(",", $currentState);
         $days = $this->days;
 
-        for ($i = 0; $i <= $days; $i++) {
-            for ($j = 0; $j <= count($currentState); $j++) {
+        for ($i = 1; $i <= $days; $i++) {
+            for ($j = 0; $j < count($currentState); $j++) {
+
                 $individualState = intval($currentState[$j]);
-                $individualState --;
 
                 if (BIRTHING_LANTERNFISH == $individualState) {
                     $individualState = RELIEVED_LANTERNFISH;
-                    $currentState[] = BABY_LANTERNFISH;
+                    array_push($currentState,BABY_LANTERNFISH);
                 }
+
+                $individualState--;
+                $currentState[$j] = $individualState;
             }
         }
 
+        print_r($currentState);
         $finalState = implode(",", $currentState);
-
-        echo "\n The new Lanternfishes have been spawned! \n";
-        echo "\n fishes: " . $this->initialState;
-        echo "\n days: " . $this->days. "\n";
-        echo "\n final state: " . $finalState. "\n";
-        echo "\n At the end there are " . strlen($finalState) . " lanternfishes! \n";
+        $this->message->resultMsg($initialStateArray, $this->days, $finalState, count($currentState));
     }
 
 }

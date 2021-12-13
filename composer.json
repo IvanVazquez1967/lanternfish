@@ -8,7 +8,7 @@
             "src/aux.php"
         ]
     },
-    "require": {
-        "ext-pcntl": "*"
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }

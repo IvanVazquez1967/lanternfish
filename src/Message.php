@@ -15,33 +15,38 @@ class Message
         $this->helper = new Helper();
     }
 
-    public function welcomeMsg(): string
+    public function mainMsg($msgType)
     {
         $this->helper->clearScreen();
         echo INTRO_MSG;
 
-        return $this->getParams();
+        return $this->getOption();
     }
 
-    public function getParams(): string
+
+    public function getOption()
     {
         fscanf(STDIN, "%s", $option);
-
-        if ("y" != $option && "n" != $option) {
-            $this->exitMsg();
-        }
-
-        return $option;
+        return $this->helper->continueOrLeave($option);
     }
 
-    #[NoReturn]
+    public function resultMsg($initialState, $days, $finalState, $fishesTotal)
+    {
+        $this->helper->clearScreen();
+
+        echo "\n The new Lanternfishes have been spawned! \n";
+        echo "\n initial state: " . $initialState;
+        echo "\n days: " . $days. "\n";
+        echo "\n final state: " . $finalState. "\n";
+        echo "\n At the end there are " . $fishesTotal . " lanternfishes! \n";
+    }
+    
     public function exitMsg()
     {
         echo EXIT_MSG;
         $this->helper->leaveApp();
     }
 
-    #[NoReturn]
     public function byeMsg()
     {
         echo BYE_MSG;

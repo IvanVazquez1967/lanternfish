@@ -10,11 +10,6 @@ class Helper
 {
     public Message $message;
 
-    function __construct()
-    {
-        $this->message = new Message();
-    }
-
     public function setParams(): array
     {
         $nodes = [];
@@ -47,10 +42,24 @@ class Helper
 
     public function validate($value)
     {
+        $this->message = new Message();
         if (!is_int($value)) {
             $this->message->exitMsg();
         } else {
             return $value;
+        }
+    }
+
+    public function continueOrLeave($option)
+    {
+        $this->message = new Message();
+
+        if ("n" == $option || "N" == $option) {
+            $this->message->byeMsg();
+        } elseif ("y" == $option || "Y" == $option) {
+            return $this->setParams();
+        } else {
+            $this->message->exitMsg();
         }
     }
 
@@ -59,7 +68,6 @@ class Helper
         system('clear');
     }
 
-    #[NoReturn]
     public function leaveApp(): bool
     {
         exit(1);
