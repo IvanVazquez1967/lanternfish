@@ -22,19 +22,35 @@ const DAYS_NODE = "days";
 
 const INTRO_MSG_TYPE = "intro_msg";
 
-const BABY_LANTERNFISH = 9;
+const EXPLAIN_MSG_TYPE = "explain_msg";
 
-const RELIEVED_LANTERNFISH = 7;
+const BABY_LANTERNFISH = 8;
+
+const RELIEVED_LANTERNFISH = 6;
 
 const BIRTHING_LANTERNFISH = 0;
 
-CONST BYE_MSG = "Ok, goodbye! " . BYE_ICON . "\n";
+const NEARLY_BIRTHING_LANTERNFISH = 1;
 
-const EXIT_MSG = "you're not taking this matter seriously so goodbye! " . ANGRY_ICON . "\n";
+CONST BYE_MSG = "Ok, goodbye! " . BYE_ICON . "\n\n";
+
+const EXIT_MSG = "you're not taking this matter seriously so goodbye! " . ANGRY_ICON . "\n\n";
 
 const INTRO_MSG = "\nThe sea floor is getting steeper. Maybe the sleigh keys got carried this way?
 A massive school of glowing lanternfish swims past. They must spawn quickly to
 reach such large numbers -maybe exponentially quickly? We have modeled their
 growth rate to be sure. We found that each lanternfish creates a new lanternfish 
 once every 7 days.  \n\nDo you want to try this modeling? (y/n): ";
+
+const EXPLAIN_MSG = "Due to, this spawn process isn't necessarily synchronized between every 
+lanternfish, you can model each fish as a single number that represents the 
+number of days until it creates a new lanternfish. Furthermore, a new 
+lanternfish would surely need slightly longer before it's capable of 
+producing more lanternfish: two more days for its first cycle.\n
+So you have to assign each initial fish a number depending on its state, 
+that it's like an internal timer from 6 to 0, where each unit is a day and 
+0 is a fish about to give birth, so the next day reset to 6 cause it can 
+initialize its cycle again.\n
+- Please enter the state of each fish with a number (0 - 6) separated by a 
+comma (,) and then the number of days to compute: \n\n";
 

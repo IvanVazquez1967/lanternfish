@@ -8,7 +8,7 @@ class Lanternfish
     private int $days;
     public Message $message;
 
-    public function __construct(int $initialState, int $days)
+    public function __construct(string $initialState, string $days)
     {
         $this->initialState = $initialState;
         $this->days = $days;
@@ -22,28 +22,46 @@ class Lanternfish
      */
     public function spawn()
     {
-        $currentState = str_split(strval($this->initialState));
-        $initialStateArray = implode(",", $currentState);
+        $initialStateArray = $this->initialState;
+        $currentState = explode(",", $this->initialState);
         $days = $this->days;
 
+        //Generating an array that contains each of possible lanternfish states
+        $distinctIndividualStates = [];
+        for ($k = BIRTHING_LANTERNFISH; $k <= BABY_LANTERNFISH; $k++) {
+            $distinctIndividualStates[$k] = 0;
+        }
+
+        //Counting the entry distinct states amount
+        foreach ($currentState as $value) {
+            $distinctIndividualStates[$value] += 1;
+        }
+
         for ($i = 1; $i <= $days; $i++) {
-            for ($j = 0; $j < count($currentState); $j++) {
 
-                $individualState = intval($currentState[$j]);
+            $birthingLanternfishes = $distinctIndividualStates[BIRTHING_LANTERNFISH];
+            $distinctIndividualStates[BIRTHING_LANTERNFISH] = 0;
 
-                if (BIRTHING_LANTERNFISH == $individualState) {
-                    $individualState = RELIEVED_LANTERNFISH;
-                    array_push($currentState,BABY_LANTERNFISH);
-                }
+            for ($state = NEARLY_BIRTHING_LANTERNFISH; $state < count($distinctIndividualStates); $state ++) {
+                $distinctIndividualStates[$state - 1] += $distinctIndividualStates[$state];
+                $distinctIndividualStates[$state] = 0;
+            }
 
-                $individualState--;
-                $currentState[$j] = $individualState;
+            $distinctIndividualStates[RELIEVED_LANTERNFISH] += $birthingLanternfishes;
+            $distinctIndividualStates[BABY_LANTERNFISH] += $birthingLanternfishes;
+        }
+
+        $lanternfishesTotal = 0;
+        foreach ($distinctIndividualStates as $state => $amount) {
+            $lanternfishesTotal += $amount;
+
+            //If lanternfishes counting is bigger than PHP_INT_MAX (9223372036854775807)
+            if (PHP_INT_MAX <= $lanternfishesTotal) {
+                $lanternfishesTotal = "Infinite";
             }
         }
 
-        print_r($currentState);
-        $finalState = implode(",", $currentState);
-        $this->message->resultMsg($initialStateArray, $this->days, $finalState, count($currentState));
+        $this->message->resultMsg($initialStateArray, $this->days, $lanternfishesTotal);
     }
 
 }

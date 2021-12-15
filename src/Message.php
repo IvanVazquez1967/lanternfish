@@ -2,10 +2,6 @@
 
 namespace Lanternfish;
 
-use JetBrains\PhpStorm\NoReturn;
-use JetBrains\PhpStorm\Pure;
-use Lanternfish\Helper;
-
 class Message
 {
     public Helper $helper;
@@ -20,9 +16,11 @@ class Message
         $this->helper->clearScreen();
         if (INTRO_MSG_TYPE == $msgType) {
             echo INTRO_MSG;
+            return $this->getOption();
+        } elseif (EXPLAIN_MSG_TYPE == $msgType) {
+            echo EXPLAIN_MSG;
+            return $this->helper->setParams();
         }
-
-        return $this->getOption();
     }
 
 
@@ -32,15 +30,13 @@ class Message
         return $this->helper->continueOrLeave($option);
     }
 
-    public function resultMsg($initialState, $days, $finalState, $fishesTotal)
+    public function resultMsg($initialState, $days, $fishesTotal)
     {
         $this->helper->clearScreen();
 
-        echo "\n The new Lanternfishes have been spawned! \n";
-        echo "\n * initial state: " . $initialState;
-        echo "\n * days: " . $days. "\n";
-        //echo "\n * final state: " . $finalState. "\n";
-        echo "\n * At the end there are " . $fishesTotal . " lanternfishes! \n";
+        echo "\n * Initial state: " . $initialState;
+        echo "\n\n * Days: " . $days;
+        echo "\n\n\n => After " . $days . " days there are " . $fishesTotal . " lanternfishes! \n\n";
     }
     
     public function exitMsg()
