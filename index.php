@@ -2,7 +2,6 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use JetBrains\PhpStorm\NoReturn;
 use Lanternfish\Lanternfish;
 use Lanternfish\Message;
 use Lanternfish\Helper;
