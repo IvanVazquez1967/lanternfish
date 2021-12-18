@@ -1,17 +1,18 @@
 <?php
 
-namespace Lanternfish;
+namespace App;
+
+use Exception;
 
 class Lanternfish
 {
-    private string $initialState;
-    private int $days;
-    public Message $message;
 
-    public function __construct(string $initialState, string $days)
+    private $days;
+    private $message;
+    private $initialState;
+
+    public function __construct()
     {
-        $this->initialState = $initialState;
-        $this->days = $days;
         $this->message = new Message();
     }
 
@@ -20,11 +21,13 @@ class Lanternfish
      *
      * @return void
      */
-    public function spawn()
+    public function spawn($initialState, $days)
     {
-        $initialStateArray = $this->initialState;
+        $this->days = $days;
+        $this->initialState = $initialState;
+
+        $days = intval($this->days);
         $currentState = explode(",", $this->initialState);
-        $days = $this->days;
 
         //Generating an array that contains each of possible lanternfish states
         $distinctIndividualStates = [];
@@ -42,7 +45,7 @@ class Lanternfish
             $birthingLanternfishes = $distinctIndividualStates[BIRTHING_LANTERNFISH];
             $distinctIndividualStates[BIRTHING_LANTERNFISH] = 0;
 
-            for ($state = NEARLY_BIRTHING_LANTERNFISH; $state < count($distinctIndividualStates); $state ++) {
+            for ($state = NEARLY_BIRTHING_LANTERNFISH; $state < count($distinctIndividualStates); $state++) {
                 $distinctIndividualStates[$state - 1] += $distinctIndividualStates[$state];
                 $distinctIndividualStates[$state] = 0;
             }
@@ -55,13 +58,15 @@ class Lanternfish
         foreach ($distinctIndividualStates as $state => $amount) {
             $lanternfishesTotal += $amount;
 
-            //If lanternfishes counting is bigger than PHP_INT_MAX (9223372036854775807)
+            //If lanternfishes counting is bigger than PHP_INT_MAX
             if (PHP_INT_MAX <= $lanternfishesTotal) {
                 $lanternfishesTotal = "Infinite";
             }
         }
 
-        $this->message->resultMsg($initialStateArray, $this->days, $lanternfishesTotal);
+        $this->message->resultMsg($this->initialState, $this->days, $lanternfishesTotal);
+        return $lanternfishesTotal;
     }
+
 
 }

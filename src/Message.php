@@ -1,10 +1,11 @@
 <?php
 
-namespace Lanternfish;
+namespace App;
 
 class Message
 {
-    public Helper $helper;
+    private $helper;
+    private $messageType;
 
     function __construct()
     {
@@ -13,11 +14,13 @@ class Message
 
     public function mainMsg($msgType)
     {
+        $this->messageType = $msgType;
         $this->helper->clearScreen();
-        if (INTRO_MSG_TYPE == $msgType) {
+
+        if (INTRO_MSG_TYPE == $this->messageType) {
             echo INTRO_MSG;
             return $this->getOption();
-        } elseif (EXPLAIN_MSG_TYPE == $msgType) {
+        } elseif (EXPLAIN_MSG_TYPE == $this->messageType) {
             echo EXPLAIN_MSG;
             return $this->helper->setParams();
         }
@@ -36,7 +39,7 @@ class Message
 
         echo "\n * Initial state: " . $initialState;
         echo "\n\n * Days: " . $days;
-        echo "\n\n\n => After " . $days . " days there are " . $fishesTotal . " lanternfishes! \n\n";
+        echo "\n\n\n => After " . $days . " days there will be " . $fishesTotal . " lanternfishes! \n\n";
     }
     
     public function exitMsg()

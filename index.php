@@ -2,15 +2,16 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Lanternfish\Lanternfish;
-use Lanternfish\Message;
-use Lanternfish\Helper;
+use App\Helper;
+use App\Message;
+use App\Lanternfish;
 
-$message = new Message();
+
 $helper = new Helper();
+$message = new Message();
+$lanterfish = new Lanternfish();
 
 $params = $message->mainMsg(INTRO_MSG_TYPE);
 
-$lanterfish = new Lanternfish($params[INITIAL_STATE_NODE], $params[DAYS_NODE]);
-$lanterfish->spawn();
+$lanterfish->spawn($params[INITIAL_STATE_NODE], $params[DAYS_NODE]);
 $helper->leaveApp();
