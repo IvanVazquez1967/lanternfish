@@ -32,7 +32,7 @@ const BIRTHING_LANTERNFISH = 0;
 
 const NEARLY_BIRTHING_LANTERNFISH = 1;
 
-CONST BYE_MSG = "Ok, goodbye! " . BYE_ICON . "\n\n";
+CONST BYE_MSG = "Ok, take care! " . BYE_ICON . "\n\n";
 
 const EXIT_MSG = "you're not taking this matter seriously so goodbye! " . ANGRY_ICON . "\n\n";
 
@@ -52,5 +52,5 @@ that it's like an internal timer from 6 to 0, where each unit is a day and
 0 is a fish about to give birth, so the next day reset to 6 cause it can 
 initialize its cycle again.\n
 - Please enter the state of each fish with a number (0 - 6) separated by a 
-comma (,) and then the number of days to compute: \n\n";
+comma (for example: 3,2,3,1,5,4,6) and then the number of days to compute: \n\n";
 

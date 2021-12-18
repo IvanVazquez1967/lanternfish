@@ -1,10 +1,10 @@
 <?php
 
-namespace Lanternfish;
+namespace App;
 
 class Helper
 {
-    public Message $message;
+    private $message;
 
     public function setParams(): array
     {
@@ -35,24 +35,46 @@ class Helper
     }
 
     public function validate($key, $value)
-    {//TODO: Do the correct validation of these inputs!
+    {//TODO: Replace with regex!
         $this->message = new Message();
-        if (DAYS_NODE == $key && !is_string($value)) {
-            $this->message->exitMsg();
-        } elseif (INITIAL_STATE_NODE == $key && !is_string($value)) {
-            $this->message->exitMsg();
-        } else {
-            return $value;
+
+        switch ($key)
+        {
+            case INITIAL_STATE_NODE:
+                $initialStateArray = str_split($value);
+                if (!(is_numeric($initialStateArray[0]) && ($initialStateArray[0] >= 1 && $initialStateArray[0] <= 6))) {
+                    $this->message->exitMsg();
+                } else {
+                    for ($i = 1; $i < count($initialStateArray); $i++) {
+                        if (($i % 2 == 0 && is_numeric($initialStateArray[$i]) && ($initialStateArray[$i] >= 1 && $initialStateArray[$i] <= 6)) ||
+                            ($i % 2 != 0 && ($initialStateArray[$i] == ","))) {
+                            continue;
+                        } else {
+                            $this->message->exitMsg();
+                        }
+                    }
+                    return $value;
+                }
+                break;
+
+            case DAYS_NODE:
+                if (!is_numeric($value)) {
+                    $this->message->exitMsg();
+                } else {
+                    return $value;
+                }
+                break;
         }
     }
 
     public function continueOrLeave($option)
     {
         $this->message = new Message();
+        $option = strtolower($option);
 
-        if ("n" == $option || "N" == $option) {
+        if ("n" == $option) {
             $this->message->byeMsg();
-        } elseif ("y" == $option || "Y" == $option) {
+        } elseif ("y" == $option) {
             return $this->message->mainMsg(EXPLAIN_MSG_TYPE);
         } else {
             $this->message->exitMsg();
@@ -66,7 +88,7 @@ class Helper
 
     public function leaveApp(): bool
     {
-        exit(1);
+        exit();
     }
 }
 
