@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 RUN composer dump-autoload
 
-RUN chmod -R 775 /usr/src/app/vendor/autoload.php
+RUN chmod -R 777 /usr/src/app/vendor
 
 CMD [ "php"]
 
