@@ -3,8 +3,8 @@
 # Lanternfish
 <h3>Advent of Code - Day 6: Lanternfish<h3/>
 
-This little tiny application has been developed to solve this puzzle as a part of Purple's recruiting process.
-It's not necessary to install nothing in your local environment but Docker, since this app runs inside a Docker container.
+This little tiny application has been developed to solve Adventofcode's Day 6 puzzle as a part of Purple's recruiting process.
+It's not necessary to install nothing in your local environment but Docker, since this app runs inside a container.
 
 - After clone, go to the root dir in your console and execute:
 
