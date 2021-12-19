@@ -9,13 +9,13 @@ It's not necessary to install nothing in your local environment but Docker, sinc
 - After clone, go to the root dir in your console and execute:
 
 ```bash
-docker build -t composerImg .
+docker build -t composerimg .
 ```
 
 - Run your container using the image you just built:
 
 ```bash
-docker run -it -d -v $PWD:/app --name phpcomposerdev composerImg
+docker run -it -d -v $PWD:/app --name phpcomposerdev composerimg
 ```
 
 - Run the App inside your container executing it:
