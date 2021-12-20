@@ -86,7 +86,7 @@ class Helper
         system('clear');
     }
 
-    public function leaveApp(): bool
+    public function leaveApp()
     {
         exit();
     }
