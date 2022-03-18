@@ -3,7 +3,7 @@
 # Lanternfish
 <h3>Advent of Code - Day 6: Lanternfish<h3/>
 
-This little tiny application has been developed to solve Adventofcode's Day 6 puzzle as a part of Purple's recruiting process.
+This little tiny application has been developed to solve Adventofcode's Day 6 puzzle.
 It's not necessary to install nothing in your local environment but Docker, since this app runs inside a container.
 
 - After clone, go to the root dir in your console and execute:
@@ -41,6 +41,3 @@ In order to run the unit tests, go out your container and in the root dir of the
 ```bash
 docker run -v $PWD:/app --rm phpunit/phpunit test
 ```
-
-
-Thank you Iain for this challenge, It was very fun! 😃👌💜
